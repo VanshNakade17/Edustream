@@ -1,0 +1,23 @@
+<!-- post_list.html -->
+<h2>Posts</h2>
+<ul>
+    {% for post in posts %}
+    <li>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.description }}</p>
+
+        {% if post.post_type == 'image' %}
+            <img src="{{ post.file.url }}" alt="{{ post.title }}">
+        {% elif post.post_type == 'video' %}
+            <video controls>
+                <source src="{{ post.file.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        {% elif post.post_type == 'document' %}
+            <a href="{{ post.file.url }}">Download {{ post.title }}</a>
+        {% endif %}
+
+        <p>Posted on: {{ post.posted_date }}</p>
+    </li>
+    {% endfor %}
+</ul>
